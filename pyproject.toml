@@ -1,0 +1,20 @@
+[project]
+name = "vera-guardrail"
+version = "0.1.0"
+description = "VERA: an ethical harness + human-feedback loop layered on NVIDIA NeMo Guardrails, with agent-orchestration placement experiments."
+requires-python = ">=3.10"
+dependencies = ["nemoguardrails>=0.24", "pyyaml"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::UserWarning"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["vera"]

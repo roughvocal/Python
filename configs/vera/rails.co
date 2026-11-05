@@ -1,0 +1,38 @@
+# VERA ethical rails (Colang 1.0).
+# The actions return "allow" or "block"; escalations are resolved inside the
+# action (human reviewer callback, or the harness' escalation_default).
+
+define bot vera refuse input
+  "I can't help with that request. It conflicts with VERA's ethical policy."
+
+define bot vera refuse output
+  "I drafted a response but withheld it because it conflicts with VERA's ethical policy."
+
+define subflow vera ethical check input
+  $vera_verdict = execute vera_check_input
+  if $vera_verdict == "block"
+    bot vera refuse input
+    stop
+
+define subflow vera ethical check output
+  $vera_verdict = execute vera_check_output
+  if $vera_verdict == "block"
+    bot vera refuse output
+    stop
+
+# Arbiter architecture: instead of stacking after NeMo's self-check, VERA
+# receives the base verdict (NeMo's self-check, invoked from the action) and
+# makes the final decision. This lets the
+# ethical layer (and the human feedback it has absorbed) overturn base
+# over-refusals as well as catch base misses.
+define subflow vera arbiter check input
+  $vera_verdict = execute vera_arbitrate_input
+  if $vera_verdict == "block"
+    bot vera refuse input
+    stop
+
+define subflow vera arbiter check output
+  $vera_verdict = execute vera_arbitrate_output
+  if $vera_verdict == "block"
+    bot vera refuse output
+    stop
