@@ -219,10 +219,18 @@ def e7_orchestration(items):
     }
 
 
+def e8_criminology(items):
+    from .crim_eval import e8
+
+    return e8(items)
+
+
 EXPERIMENTS = {
+    "E8": e8_criminology,
     "E1": e1_architecture, "E2": e2_presets, "E3": e3_feedback, "E4": e4_ablation,
     "E5": e5_noise, "E6": e6_inline_hitl, "E7": e7_orchestration,
 }
+DEFAULT_EXPERIMENTS = ["E1", "E2", "E3", "E4", "E5", "E6", "E7"]
 
 
 # ---------------------------------------------------------------------------
@@ -277,12 +285,16 @@ def render_report(res: Dict) -> str:
         out += ["## E7 Ethical-layer placement in agent orchestration"]
         for kind, r in res["E7"].items():
             out += [f"### harness: {kind}", render_placement_table(r), ""]
+    if "E8" in res:
+        from .crim_eval import render as render_e8
+
+        out += [render_e8(res["E8"]), ""]
     return "\n".join(out)
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--exp", default=",".join(EXPERIMENTS), help="comma-separated, e.g. E1,E3")
+    ap.add_argument("--exp", default=",".join(DEFAULT_EXPERIMENTS), help="comma-separated, e.g. E1,E3")
     ap.add_argument("--out", default="results/latest.json")
     ap.add_argument("--report", default="results/REPORT.md")
     args = ap.parse_args(argv)

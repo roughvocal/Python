@@ -128,6 +128,10 @@ Each placement has a characteristic blind spot:
 - **Tool gate** catches the injections but is blind to data flow it cannot see in a single call (T12).
 - **Layered** covers the union of what the others catch, at roughly 3.7× the checks of the perimeter. The one remaining miss (T07, coercive upsell to elderly customers) is a lexical coverage gap. Feedback collected on *chat* prompts did **not** transfer to that *agent* task, so feedback is domain-specific.
 
+## E8 — Criminology evaluation set (in preparation)
+
+`data/crim_eval/` holds an expert-authored evaluation set covering grooming, elder financial exploitation, neutralization techniques and stalking scripts. It is written and frozen **before** the criminology modules are built, so that module gains cannot come from fitting the test items. See `data/crim_eval/README_ko.md` for the authoring guide. `python -m vera.crim_eval check|freeze|baseline` validates the items, freezes them and runs a baseline, and `python -m vera.experiment --exp E8` runs the evaluation. For now the set contains only 12 benign control items. A first dev-split check already shows that the feedback-trained harness escalates a benign teacher-to-parents message (the words "students" and "parents" push it into the escalation band), so it ends up blocked: 1 of 6 controls.
+
 ## Caveats (please read before citing numbers)
 
 - This is a **pilot harness**, not a benchmark. The datasets are small (72 prompts, 12 tasks) and hand-written by the author of the harness.
