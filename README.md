@@ -6,7 +6,7 @@ VERA is an experimental **ethical layer** that attaches to NVIDIA NeMo Guardrail
 2. **Human feedback / ethical adjustment:** how does the guardrail change when humans give feedback, or when the ethical "dial" (presets, principle weights) is turned? Which feedback channel actually does the work?
 3. **Architecture / orchestration:** where should the ethical layer sit in an agent system (perimeter, supervisor agent, tool gate, layered), and what does each placement miss?
 
-> **한국어 요약** — NeMo Guardrails(기본 self-check rail) 위에 윤리 계층(VERA)을 붙여 (1) 하네스 결합 방식(적층 vs. 중재자)의 효과, (2) 인간 피드백(사례 기억·원칙 가중치·임계값 보정)과 윤리 프리셋 조정의 효과, (3) 에이전트 오케스트레이션에서 윤리 계층의 배치 위치(경계/감독 에이전트/도구 게이트/다층)별 효과를 실험합니다. 모든 실험은 오프라인에서 결정론적으로 재현됩니다. 결과는 아래 표와 `results/REPORT.md`에 있습니다.
+> **한국어 요약** — NeMo Guardrails(기본 self-check rail) 위에 윤리 계층(VERA)을 붙여 (1) 하네스 결합 방식(적층 vs. 중재자)의 효과, (2) 인간 피드백(사례 기억·원칙 가중치·임계값 보정)과 윤리 프리셋 조정의 효과, (3) 에이전트 오케스트레이션에서 윤리 계층의 배치 위치(경계/감독 에이전트/도구 게이트/다층)별 효과를 실험합니다. 모든 실험은 오프라인에서 결정론적으로 재현됩니다. 결과는 아래 표와 `results/REPORT.md`에 있으며, 한국어 시각 리포트는 [`docs/vera_report_ko.html`](docs/vera_report_ko.html)(브라우저로 열기)에 있습니다.
 
 ---
 
